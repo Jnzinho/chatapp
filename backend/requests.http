@@ -1,0 +1,8 @@
+
+
+
+### Health
+GET http://localhost:3000/health
+
+### Users
+GET http://localhost:3000/users

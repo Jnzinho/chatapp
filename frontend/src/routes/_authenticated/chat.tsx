@@ -21,9 +21,9 @@ function ChatLayout() {
 		<div className="relative flex min-h-screen items-center justify-center p-4 sm:p-8">
 			<div className="glass-panel animate-slide-up flex h-[88vh] w-full max-w-5xl overflow-hidden rounded-3xl">
 				{/* Sidebar */}
-				<aside className="flex w-[280px] shrink-0 flex-col border-r border-[var(--line)]">
+				<aside className="flex w-[280px] shrink-0 flex-col border-r border-line">
 					<div className="px-5 py-5">
-						<h2 className="font-display text-lg font-bold tracking-tight text-[var(--ink)]">
+						<h2 className="font-display text-lg font-bold tracking-tight text-ink">
 							Mensagens
 						</h2>
 					</div>
@@ -57,24 +57,24 @@ function ChatLayout() {
 				{/* Main area */}
 				<div className="flex flex-1 flex-col">
 					{/* Top bar */}
-					<div className="flex items-center justify-end gap-3 border-b border-[var(--line)] px-6 py-3">
+					<div className="flex items-center justify-end gap-3 border-b border-line px-6 py-3">
 						<div className="text-right">
-							<p className="text-sm font-semibold text-[var(--ink)]">
+							<p className="text-sm font-semibold text-ink">
 								{user.name}
 							</p>
-							<p className="text-[11px] text-[var(--ink-muted)]">
+							<p className="text-[11px] text-ink-muted">
 								{user.email}
 							</p>
 						</div>
 						<img
 							src={user.avatar}
 							alt={user.name}
-							className="h-9 w-9 rounded-full bg-[var(--received-bg)] ring-2 ring-[var(--glass-border)]"
+							className="h-9 w-9 rounded-full bg-received-bg ring-2 ring-glass-border"
 						/>
 						<button
 							type="button"
 							onClick={logout}
-							className="ml-1 rounded-lg p-2 text-[var(--ink-muted)] transition-all hover:bg-[var(--sidebar-hover)] hover:text-[var(--ink)]"
+							className="ml-1 rounded-lg p-2 text-ink-muted transition-all hover:bg-sidebar-hover hover:text-ink"
 							title="Sair"
 						>
 							<LogOut size={16} />

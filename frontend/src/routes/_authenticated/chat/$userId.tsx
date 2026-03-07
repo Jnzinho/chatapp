@@ -31,7 +31,7 @@ function ChatRoom() {
 
   if (!user || !otherUser) {
     return (
-      <div className="flex flex-1 items-center justify-center text-sm text-[var(--ink-muted)]">
+      <div className="flex flex-1 items-center justify-center text-sm text-ink-muted">
         Usuário não encontrado
       </div>
     );

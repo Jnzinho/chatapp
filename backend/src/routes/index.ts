@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
 
 export const indexRouter = Router();
 
-indexRouter.get("/", (_req, res) => {
-  res.json({ message: "Chat API" });
+indexRouter.get('/health', (_req, res) => {
+  res.json({ message: 'OK' });
 });

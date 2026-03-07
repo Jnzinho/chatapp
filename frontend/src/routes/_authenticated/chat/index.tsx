@@ -8,14 +8,14 @@ export const Route = createFileRoute("/_authenticated/chat/")({
 function ChatIndex() {
 	return (
 		<div className="flex flex-1 flex-col items-center justify-center gap-3">
-			<div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--amber-soft)]">
+			<div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-soft">
 				<MessageCircle
 					size={28}
 					strokeWidth={1.5}
-					className="text-[var(--amber)]"
+					className="text-amber"
 				/>
 			</div>
-			<p className="text-sm text-[var(--ink-muted)]">
+			<p className="text-sm text-ink-muted">
 				Selecione uma conversa para começar
 			</p>
 		</div>

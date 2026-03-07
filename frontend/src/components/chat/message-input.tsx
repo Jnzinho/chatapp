@@ -19,7 +19,7 @@ export function MessageInput({ onSend }: Props) {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="border-t border-[var(--line)] px-6 py-4"
+			className="border-t border-line px-6 py-4"
 		>
 			<textarea
 				value={text}
@@ -37,7 +37,7 @@ export function MessageInput({ onSend }: Props) {
 			<div className="mt-3 flex justify-end">
 				<button
 					type="submit"
-					className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-[var(--ink)] transition-all hover:text-[var(--amber-deep)]"
+					className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-ink transition-all hover:text-amber-deep"
 				>
 					Enviar <ArrowRight size={16} />
 				</button>
