@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { Message } from "../models/Message";
 import type { IUser } from "../models/User";
+import { getIO } from "../socket";
 
 export async function getMessages(req: Request, res: Response) {
   try {
@@ -35,6 +36,8 @@ export async function sendMessage(req: Request, res: Response) {
       receiver: userId,
       content: content.trim(),
     });
+
+    getIO().to(userId).emit("message:new", message.toJSON());
 
     res.status(201).json(message);
   } catch (err) {

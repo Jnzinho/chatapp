@@ -171,3 +171,18 @@ body {
 .animate-slide-right {
   animation: slide-in-right 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+@keyframes slide-down-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down-fade 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}

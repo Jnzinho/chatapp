@@ -4,6 +4,7 @@ import { ChatHeader } from "#/components/chat/chat-header";
 import { MessageBubble } from "#/components/chat/message-bubble";
 import { MessageInput } from "#/components/chat/message-input";
 import { useAuth } from "#/contexts/auth";
+import { useSocket } from "#/contexts/socket";
 import { useMessages, useSendMessage } from "#/hooks/use-messages";
 import { useUsers } from "#/hooks/use-users";
 
@@ -14,12 +15,17 @@ export const Route = createFileRoute("/_authenticated/chat/$userId")({
 function ChatRoom() {
   const { userId } = Route.useParams();
   const { user } = useAuth();
+  const { markAsRead } = useSocket();
   const { data: users = [] } = useUsers(!!user);
   const { data: messages = [] } = useMessages(userId);
   const sendMessage = useSendMessage(userId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const otherUser = users.find((u) => u._id === userId);
+
+  useEffect(() => {
+    markAsRead(userId);
+  }, [userId, markAsRead]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

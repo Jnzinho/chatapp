@@ -5,9 +5,10 @@ type Props = {
   user: User;
   lastMessage?: string;
   isActive: boolean;
+  unreadCount?: number;
 };
 
-export function UserListItem({ user, lastMessage, isActive }: Props) {
+export function UserListItem({ user, lastMessage, isActive, unreadCount = 0 }: Props) {
   return (
     <Link
       to="/chat/$userId"
@@ -36,6 +37,11 @@ export function UserListItem({ user, lastMessage, isActive }: Props) {
           <p className="truncate text-[11px] text-ink-muted">{lastMessage}</p>
         )}
       </div>
+      {unreadCount > 0 && (
+        <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-linear-to-br from-amber to-amber-deep px-1.5 text-[10px] font-bold text-white">
+          {unreadCount > 99 ? "99+" : unreadCount}
+        </span>
+      )}
     </Link>
   );
 }

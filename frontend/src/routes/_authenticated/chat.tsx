@@ -1,12 +1,18 @@
-import { createFileRoute, Outlet, useNavigate, useParams } from "@tanstack/react-router";
-import { LogOut } from "lucide-react";
-import { UserListItem } from "#/components/chat/user-list-item";
-import { useAuth } from "#/contexts/auth";
-import { useLogout } from "#/hooks/use-auth";
-import { useUsers } from "#/hooks/use-users";
-import { useMessages } from "#/hooks/use-messages";
+import {
+  createFileRoute,
+  Outlet,
+  useNavigate,
+  useParams,
+} from '@tanstack/react-router';
+import { LogOut } from 'lucide-react';
+import { UserListItem } from '#/components/chat/user-list-item';
+import { useAuth } from '#/contexts/auth';
+import { useSocket } from '#/contexts/socket';
+import { useLogout } from '#/hooks/use-auth';
+import { useUsers } from '#/hooks/use-users';
+import { useMessages } from '#/hooks/use-messages';
 
-export const Route = createFileRoute("/_authenticated/chat")({
+export const Route = createFileRoute('/_authenticated/chat')({
   component: ChatLayout,
 });
 
@@ -63,11 +69,11 @@ function ChatLayout() {
               onClick={() =>
                 logoutMutation.mutate(undefined, {
                   onSuccess: () => {
-                    navigate({ to: "/login", replace: true });
+                    navigate({ to: '/login', replace: true });
                   },
                 })
               }
-              className="ml-1 rounded-lg p-2 text-ink-muted transition-all hover:bg-sidebar-hover hover:text-ink"
+              className="cursor-pointer ml-1 rounded-lg p-2 text-ink-muted transition-all hover:bg-sidebar-hover hover:text-ink"
               title="Sair"
             >
               <LogOut size={16} />
@@ -88,10 +94,11 @@ function SidebarItem({
   currentUserId,
   isActive,
 }: {
-  user: import("#/types").User;
+  user: import('#/types').User;
   currentUserId: string;
   isActive: boolean;
 }) {
+  const { unreadCounts } = useSocket();
   const { data: messages } = useMessages(user._id);
   const lastMsg = messages?.[messages.length - 1];
 
@@ -103,5 +110,12 @@ function SidebarItem({
         : lastMsg.content;
   }
 
-  return <UserListItem user={user} lastMessage={preview} isActive={isActive} />;
+  return (
+    <UserListItem
+      user={user}
+      lastMessage={preview}
+      isActive={isActive}
+      unreadCount={unreadCounts.get(user._id) ?? 0}
+    />
+  );
 }

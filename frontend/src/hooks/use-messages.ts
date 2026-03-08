@@ -7,7 +7,6 @@ export function useMessages(userId: string) {
     queryKey: ['messages', userId],
     queryFn: () => api.get(`/messages/${userId}`),
     enabled: !!userId,
-    refetchInterval: 5000,
   });
 }
 
