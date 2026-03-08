@@ -1,6 +1,6 @@
-import { createContext, useContext, type ReactNode } from "react";
-import { useCurrentUser } from "#/hooks/use-auth";
-import type { User } from "#/types";
+import { createContext, useContext, type ReactNode } from 'react';
+import { useCurrentUser } from '#/hooks/use-auth';
+import type { User } from '#/types';
 
 type AuthContextType = {
   user: User | null;
@@ -21,6 +21,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export function useAuth(): AuthContextType {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
 }

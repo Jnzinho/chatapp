@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "#/lib/api";
-import type { User } from "#/types";
+import { useQuery } from '@tanstack/react-query';
+import { api } from '#/lib/api';
+import type { User } from '#/types';
 
 export function useUsers(enabled = true) {
   return useQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: () => api.get("/users"),
+    queryKey: ['users'],
+    queryFn: () => api.get('/users'),
     enabled,
   });
 }

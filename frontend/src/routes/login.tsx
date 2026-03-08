@@ -1,13 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { MessageCircle } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { Button } from "#/components/ui/button";
-import { FormField } from "#/components/ui/form-field";
-import { useLogin } from "#/hooks/use-auth";
-import { loginSchema, type LoginFormData } from "#/lib/schemas";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { MessageCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { Button } from '#/components/ui/button';
+import { FormField } from '#/components/ui/form-field';
+import { useLogin } from '#/hooks/use-auth';
+import { loginSchema, type LoginFormData } from '#/lib/schemas';
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute('/login')({
   component: LoginPage,
 });
 
@@ -26,7 +26,7 @@ function LoginPage() {
   function onSubmit(data: LoginFormData) {
     loginMutation.mutate(data, {
       onSuccess: () => {
-        navigate({ to: "/chat" });
+        navigate({ to: '/chat' });
       },
     });
   }
@@ -51,19 +51,21 @@ function LoginPage() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <FormField label="Email" error={errors.email}>
             <input
-              {...register("email")}
+              {...register('email')}
               type="email"
               placeholder="seu@email.com"
-              className={`form-input ${errors.email ? "form-input-error" : ""}`}
+              className={`form-input ${errors.email ? 'form-input-error' : ''}`}
             />
           </FormField>
 
           <FormField label="Senha" error={errors.password}>
             <input
-              {...register("password")}
+              {...register('password')}
               type="password"
               placeholder="••••••••"
-              className={`form-input ${errors.password ? "form-input-error" : ""}`}
+              className={`form-input ${
+                errors.password ? 'form-input-error' : ''
+              }`}
             />
           </FormField>
 
@@ -74,12 +76,12 @@ function LoginPage() {
           )}
 
           <Button type="submit" disabled={loginMutation.isPending} fullWidth>
-            {loginMutation.isPending ? "Entrando..." : "Entrar"}
+            {loginMutation.isPending ? 'Entrando...' : 'Entrar'}
           </Button>
         </form>
 
         <p className="mt-6 text-center text-xs text-ink-muted">
-          Não tem conta?{" "}
+          Não tem conta?{' '}
           <Link
             to="/register"
             className="font-semibold text-amber-deep no-underline transition-colors hover:text-amber"
