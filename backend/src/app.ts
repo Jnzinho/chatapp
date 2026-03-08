@@ -30,6 +30,8 @@ app.use(
   cors({
     origin: CORS_ORIGIN,
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization, Accept'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   }),
 );
 
@@ -49,6 +51,7 @@ const sessionMiddleware = session({
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    partitioned: true,
   },
 });
 
