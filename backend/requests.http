@@ -6,3 +6,12 @@ GET http://localhost:3000/health
 
 ### Users
 GET http://localhost:3000/users
+
+### Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "joaovitorcastrogg@gmail.com",
+  "password": "Teste123"
+}
