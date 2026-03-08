@@ -22,7 +22,7 @@ export function MessageBubble({ message, isOwn, index }: Props) {
       }`}
       style={{ animationDelay: `${index * 50}ms` }}
     >
-      <div className="max-w-[70%]">
+      <div className="max-w-[85%] md:max-w-[70%]">
         <div
           className={`rounded-2xl px-4 py-2.5 text-[13px] leading-relaxed ${
             isOwn

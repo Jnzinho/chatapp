@@ -1,12 +1,23 @@
+import { ArrowLeft } from 'lucide-react';
 import type { User } from '#/types';
 
 type Props = {
   user: User;
+  onBack?: () => void;
 };
 
-export function ChatHeader({ user }: Props) {
+export function ChatHeader({ user, onBack }: Props) {
   return (
-    <div className="flex items-center gap-3 border-b border-line px-6 py-3.5">
+    <div className="flex items-center gap-3 border-b border-line px-4 py-3.5 md:px-6">
+      {onBack && (
+        <button
+          type="button"
+          onClick={onBack}
+          className="cursor-pointer -ml-1 rounded-lg p-1.5 text-ink-muted transition-all hover:bg-sidebar-hover hover:text-ink"
+        >
+          <ArrowLeft size={20} />
+        </button>
+      )}
       <div className="relative">
         <img
           src={user.avatar}

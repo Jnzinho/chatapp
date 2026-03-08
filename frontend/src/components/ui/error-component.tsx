@@ -1,14 +1,14 @@
-import { useState } from "react";
-import type { ErrorComponentProps } from "@tanstack/react-router";
-import { useRouter } from "@tanstack/react-router";
-import { Button } from "./button";
+import { useState } from 'react';
+import type { ErrorComponentProps } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
+import { Button } from './button';
 
 export function DefaultErrorComponent({ error, reset }: ErrorComponentProps) {
   const [showDetails, setShowDetails] = useState(false);
   const router = useRouter();
 
   const message =
-    error instanceof Error ? error.message : "An unexpected error occurred.";
+    error instanceof Error ? error.message : 'An unexpected error occurred.';
 
   return (
     <div className="flex h-full items-center justify-center p-6">
@@ -31,7 +31,7 @@ export function DefaultErrorComponent({ error, reset }: ErrorComponentProps) {
         </div>
 
         <h2 className="font-display mb-1 text-xl font-bold text-ink">
-          Something went wrong
+          Ocorreu um erro
         </h2>
         <p className="mb-6 text-sm text-ink-muted">{message}</p>
 
@@ -43,10 +43,10 @@ export function DefaultErrorComponent({ error, reset }: ErrorComponentProps) {
               router.invalidate();
             }}
           >
-            Try again
+            Tentar novamente
           </Button>
           <Button variant="ghost" onClick={() => setShowDetails((v) => !v)}>
-            {showDetails ? "Hide details" : "Details"}
+            {showDetails ? 'Ocultar detalhes' : 'Detalhes'}
           </Button>
         </div>
 

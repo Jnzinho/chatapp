@@ -20,6 +20,10 @@ const httpServer = http.createServer(app);
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/chat';
 const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 connectDatabase();
 
 app.use(
