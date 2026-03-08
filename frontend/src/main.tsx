@@ -1,11 +1,13 @@
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
+import { DefaultErrorComponent } from '#/components/ui/error-component';
 
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  defaultErrorComponent: DefaultErrorComponent,
 });
 
 declare module '@tanstack/react-router' {
