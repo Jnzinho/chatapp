@@ -199,6 +199,10 @@ body {
 }
 
 @media (max-width: 767px) {
+  .form-input {
+    font-size: 16px;
+  }
+
   .glass-panel {
     border-radius: 0;
     border: none;
