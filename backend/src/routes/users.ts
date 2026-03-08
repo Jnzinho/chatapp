@@ -1,7 +1,7 @@
 import { Router } from "express";
+import { isAuthenticated } from "../middleware/auth";
+import * as usersController from "../controllers/users.controller";
 
 export const usersRouter = Router();
 
-usersRouter.get("/", (_req, res) => {
-  res.json({ message: "respond with a resource" });
-});
+usersRouter.get("/", isAuthenticated, usersController.listUsers);

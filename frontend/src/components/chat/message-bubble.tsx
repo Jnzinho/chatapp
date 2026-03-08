@@ -6,7 +6,8 @@ type Props = {
   index: number;
 };
 
-function formatTime(date: Date): string {
+function formatTime(dateStr: string): string {
+  const date = new Date(dateStr);
   return `Hoje, ${date.getHours()}h${String(date.getMinutes()).padStart(
     2,
     '0',
@@ -36,7 +37,7 @@ export function MessageBubble({ message, isOwn, index }: Props) {
             isOwn ? 'text-right' : 'text-left'
           }`}
         >
-          {formatTime(message.timestamp)}
+          {formatTime(message.createdAt)}
         </p>
       </div>
     </div>

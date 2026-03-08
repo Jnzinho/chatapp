@@ -1,35 +1,33 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useRef, useState } from 'react';
-import { ChatHeader } from '#/components/chat/chat-header';
-import { MessageBubble } from '#/components/chat/message-bubble';
-import { MessageInput } from '#/components/chat/message-input';
-import { useAuth } from '#/contexts/auth';
-import { MESSAGES, USERS, getMessagesForConversation } from '#/data/fake';
-import type { Message } from '#/types';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
+import { ChatHeader } from "#/components/chat/chat-header";
+import { MessageBubble } from "#/components/chat/message-bubble";
+import { MessageInput } from "#/components/chat/message-input";
+import { useAuth } from "#/contexts/auth";
+import { useMessages, useSendMessage } from "#/hooks/use-messages";
+import { useUsers } from "#/hooks/use-users";
 
-export const Route = createFileRoute('/_authenticated/chat/$userId')({
+export const Route = createFileRoute("/_authenticated/chat/$userId")({
   component: ChatRoom,
 });
 
 function ChatRoom() {
   const { userId } = Route.useParams();
   const { user } = useAuth();
+  const { data: users = [] } = useUsers(!!user);
+  const { data: messages = [] } = useMessages(userId);
+  const sendMessage = useSendMessage(userId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const otherUser = USERS.find((u) => u.id === userId);
-
-  const [messages, setMessages] = useState<Message[]>([]);
+  const otherUser = users.find((u) => u._id === userId);
 
   useEffect(() => {
-    if (!user) return;
-    setMessages(getMessagesForConversation(user.id, userId));
-  }, [user, userId]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  if (!user || !otherUser) {
+  if (!user) return null;
+
+  if (!otherUser) {
     return (
       <div className="flex flex-1 items-center justify-center text-sm text-ink-muted">
         Usuário não encontrado
@@ -38,16 +36,7 @@ function ChatRoom() {
   }
 
   function handleSend(content: string) {
-    if (!user) return;
-    const newMsg: Message = {
-      id: `m${Date.now()}`,
-      senderId: user.id,
-      receiverId: userId,
-      content,
-      timestamp: new Date(),
-    };
-    MESSAGES.push(newMsg);
-    setMessages((prev) => [...prev, newMsg]);
+    sendMessage.mutate(content);
   }
 
   return (
@@ -56,9 +45,9 @@ function ChatRoom() {
       <div className="flex-1 space-y-3 overflow-y-auto px-6 py-4">
         {messages.map((msg, i) => (
           <MessageBubble
-            key={msg.id}
+            key={msg._id}
             message={msg}
-            isOwn={msg.senderId === user.id}
+            isOwn={msg.sender === user!._id}
             index={i}
           />
         ))}

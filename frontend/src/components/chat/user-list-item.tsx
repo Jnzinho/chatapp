@@ -11,7 +11,7 @@ export function UserListItem({ user, lastMessage, isActive }: Props) {
   return (
     <Link
       to="/chat/$userId"
-      params={{ userId: user.id }}
+      params={{ userId: user._id }}
       className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 no-underline transition-all duration-200 ${
         isActive
           ? 'border border-sidebar-active-border bg-sidebar-active'
