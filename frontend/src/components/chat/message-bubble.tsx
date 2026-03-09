@@ -1,3 +1,5 @@
+import { format, isToday, isYesterday } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import type { Message } from '#/types';
 
 type Props = {
@@ -8,10 +10,11 @@ type Props = {
 
 function formatTime(dateStr: string): string {
   const date = new Date(dateStr);
-  return `Hoje, ${date.getHours()}h${String(date.getMinutes()).padStart(
-    2,
-    '0',
-  )}`;
+  const time = format(date, "HH'h'mm", { locale: ptBR });
+
+  if (isToday(date)) return `Hoje, ${time}`;
+  if (isYesterday(date)) return `Ontem, ${time}`;
+  return format(date, "dd/MM/yyyy, HH'h'mm", { locale: ptBR });
 }
 
 export function MessageBubble({ message, isOwn, index }: Props) {
