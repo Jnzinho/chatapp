@@ -1,4 +1,4 @@
-# IXC Chat
+# Chat
 
 Aplicação de chat em tempo real com **React**, **TypeScript**, **Express** e **Socket.IO**, usando **MongoDB** como banco de dados.
 
